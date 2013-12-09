@@ -2,8 +2,6 @@
 include "Function.php";
 $msql=new phpMysql_h;
 $msql->init();
-$lesson=$_GET['lesson'];
-$part=$_GET['part'];
 ?>
 <html>
 <head>
@@ -17,26 +15,31 @@ $part=$_GET['part'];
 </head>
 <body onload="load();">
 	<fieldset>
-		<legend>Lesson <?php echo $lesson; ?>; Part <?php echo $part; ?></legend>
+		<legend>Wrong Words</legend>
 		<table border="1,black,dashed" cellpadding="0" cellspacing="0">
 			<tr>
 				<th>Kana</th>
 				<th>Kanji</th>
 				<th>Meaning</th>
+                <th>Lesson</th>
+                <th>Part</th>
 				<th>Degree</th>
 				<th>Master Date</th>
 				<th>Wrong</th>
+                <th>Operation</th>
 			</tr>
 			<?php
-			$msql->query("select Id,kana,kanji,meaning,times,masterdate,wrongtimes from words where lesson=$lesson and part=$part and wrongtimes>0 order by Id");
-			while(list($Id,$kana,$kanji,$meaning,$times,$masterdate,$wrongtimes)=mysql_fetch_row($msql->listmysql)){
+			$msql->query("select Id,kana,kanji,meaning,lesson,part,times,masterdate,wrongtimes from words where wrongtimes>0 order by lesson,part,Id");
+			while(list($Id,$kana,$kanji,$meaning,$lesson,$part,$times,$masterdate,$wrongtimes)=mysql_fetch_row($msql->listmysql)){
 			?>
 			<tr>
 				<td><?php echo $kana; ?></td>
 				<td><?php echo $kanji; ?></td>
 				<td><?php echo $meaning; ?></td>
+                <td><?php echo $lesson; ?></td>
+                <td><?php echo $part; ?></td>
 				<td>
-				<?php 
+				<?php
 				if($times==0){
 					echo "---";
 				}elseif($times==1){
@@ -50,6 +53,7 @@ $part=$_GET['part'];
 				</td>
 				<td><?php echo $masterdate ?></td>
 				<td align="center"><?php echo $wrongtimes ?></td>
+                <td><a href="remembered.php?Id=<?php echo $Id; ?>">Remembered</a></td>
 			</tr>
 			<?php
 			}

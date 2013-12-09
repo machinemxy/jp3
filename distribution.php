@@ -23,7 +23,7 @@ $_SESSION['part']=$part;
 		//start management
 		$tool->goURL("management.php?lesson=$lesson&part=$part");
 	}elseif($sub=="View_Mistaken_Words"){
-		$tool->goURL("mistaken.php?lesson=$lesson&part=$part");
+		$tool->goURL("mistaken.php");
 	}else{
 		//Check is there any words in the selected area
 		$msql->query("select count(*) from words where lesson=$lesson and part=$part");
