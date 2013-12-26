@@ -19,7 +19,7 @@ session_start();
 	<title>Japanese3</title>
 </head>
 <body>
-	<h1 style="color:red;">Japanese Words Reciting God Artifact V3.4</h1>
+	<h1 style="color:red;">Japanese Words Reciting God Artifact V3.5</h1>
 	<fieldset>
 		<legend>Please Select</legend>
 		<form name="form1" method="get" action="distribution.php">

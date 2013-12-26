@@ -31,18 +31,27 @@ $_SESSION['part']=$part;
 		if($count==0){
 			//no word
 			echo "There's no word in the selected area.<br/>";
-			echo "<a href='index.php'>Back</a>";
+			echo "<a href='index.php' id='fc'>Back</a>";
+			echo "<script language='javascript'>";
+			echo "window.onload=function(){document.getElementById('fc').focus();}";
+			echo "</script>";
 		}elseif($count<4){
 			//has less than 4 words
 			echo "There's too little words in the selected area.<br/>";
-			echo "<a href='index.php'>Back</a>";
+			echo "<a href='index.php' id='fc'>Back</a>";
+			echo "<script language='javascript'>";
+			echo "window.onload=function(){document.getElementById('fc').focus();}";
+			echo "</script>";
 		}else{
 			//Check whether these words have been mastered
 			$msql->query("select count(*) from words where lesson=$lesson and part=$part and times<3");
 			list($count)=mysql_fetch_row($msql->listmysql);
 			if($count==0){
 				echo "These words have been mastered.<br/>";
-				echo "<a href='index.php'>Back</a>";
+				echo "<a href='index.php' id='fc'>Back</a>";
+				echo "<script language='javascript'>";
+				echo "window.onload=function(){document.getElementById('fc').focus();}";
+				echo "</script>";
 			}else{
 				//test
 				$tool->goURL("test.php?lesson=$lesson&part=$part");
